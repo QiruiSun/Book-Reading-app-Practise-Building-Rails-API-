@@ -1,6 +1,10 @@
 class BooksController < ApplicationController
     def index
-      render json: Book.all, status: 200
+      @books = Book.all
+      if params[:rating]
+        @books = Book.where(rating: params[:rating])
+      end
+      render json: @books, status: 200
       #code
     end
 end
